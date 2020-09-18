@@ -5,4 +5,14 @@ class Reunion
     @name = name
     @activities = []
   end
+
+  def add_activity(activity)
+    activities << activity
+  end
+
+  def breakout
+    activities.each_with_object(Hash.new(0)) do |activity, hash|
+      activity.owed.each { |name, amt_owed| hash[name] += amt_owed }
+    end
+  end
 end
