@@ -15,4 +15,8 @@ class Reunion
       activity.owed.each { |name, amt_owed| hash[name] += amt_owed }
     end
   end
+
+  def summary
+    breakout.to_a.map { |arr| "#{arr[0]}: #{arr[1]}" }.join("\n")
+  end
 end
