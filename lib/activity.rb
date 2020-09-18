@@ -12,4 +12,17 @@ class Activity
     participants[name] = amt_paid
     self.total_cost += amt_paid
   end
+
+  def split
+    total_cost / participants.count
+  end
+
+  def owed
+    participants.each_with_object({}) do |participant, hash|
+      name = participant[0]
+      amt_paid = participant[1]
+
+      hash[name] = split - amt_paid
+    end
+  end
 end

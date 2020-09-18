@@ -46,4 +46,22 @@ describe Activity do
       end
     end
   end
+
+  describe '#split' do
+    it 'divides total_cost by the number of participants' do
+      subject.add_participant('Maria', 20)
+      subject.add_participant('Luther', 40)
+
+      expect(subject.split).to eql(30)
+    end
+  end
+
+  describe '#owed' do
+    it 'creates a new hash that shows what each participant owes' do
+      subject.add_participant('Maria', 20)
+      subject.add_participant('Luther', 40)
+
+      expect(subject.owed).to eql({ 'Maria' => 10, 'Luther' => -10 })
+    end
+  end
 end
