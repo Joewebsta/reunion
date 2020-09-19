@@ -30,7 +30,7 @@ class Reunion
 
   def activity_breakdown(participant_name)
     activities.each_with_object([]) do |activity, array|
-      next unless activity.participants.keys.include?(participant_name)
+      next unless activity.participants[participant_name]
 
       activity_hash = {
         activity: activity.name,
