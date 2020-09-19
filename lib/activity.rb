@@ -1,16 +1,17 @@
 class Activity
   attr_reader :name, :participants
-  attr_accessor :total_cost
 
   def initialize(name)
     @name = name
     @participants = {}
-    @total_cost = 0
   end
 
   def add_participant(name, amt_paid)
     participants[name] = amt_paid
-    self.total_cost += amt_paid
+  end
+
+  def total_cost
+    participants.values.sum
   end
 
   def split
@@ -18,11 +19,6 @@ class Activity
   end
 
   def owed
-    participants.each_with_object({}) do |participant, hash|
-      name = participant[0]
-      amt_paid = participant[1]
-
-      hash[name] = split - amt_paid
-    end
+    participants.transform_values { |amt_paid| split - amt_paid }
   end
 end

@@ -15,10 +15,6 @@ describe Activity do
     it 'has no participants' do
       expect(subject.participants).to eql({})
     end
-
-    it 'has a cost total cost of zero' do
-      expect(subject.total_cost).to eql(0)
-    end
   end
 
   describe '#add_participant' do
@@ -44,6 +40,15 @@ describe Activity do
       it 'updates total_cost' do
         expect(subject.total_cost).to eql(60)
       end
+    end
+  end
+
+  describe '#total_cost' do
+    it 'returns the sum of participant costs' do
+      subject.add_participant('Maria', 20)
+      subject.add_participant('Luther', 40)
+
+      expect(subject.total_cost).to eql(60)
     end
   end
 
